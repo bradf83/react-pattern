@@ -1,0 +1,29 @@
+
+// https://getbootstrap.com/docs/4.3/content/typography/#responsive-font-sizes
+$enable-responsive-font-sizes: true;
+
+/* Bootstrap 4 Overrides
+ -------------------------------------------------------------------------------------------------------------------- */
+
+// TODO: What is this for?
+//$colors: () !default;
+
+// TODO: Add theme here
+//$theme-colors: (
+//        "primary": ,
+//        "secondary": ,
+//        "success": ,
+//        "info": ,
+//        "warning": ,
+//        "danger": ,
+//        "light": ,
+//        "dark": ,
+//) !default;
+
+//$link-color: ;
+
+$font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$font-family-base: "Roboto", $font-family-sans-serif !default;
+
+$headings-font-weight: 400 !default;
+$headings-font-family: "Archivo Black", $font-family-sans-serif !default;
