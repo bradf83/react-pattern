@@ -8,7 +8,7 @@ import * as d3 from 'd3';
  * @constructor
  */
 
-const D3BarChartTwo = () => {
+const D3BarChartTwo = ({label}) => {
 
     const dataColours = [
         '#97233F', // Cardinals Red
@@ -121,7 +121,9 @@ const D3BarChartTwo = () => {
     }, []);
 
     return (
-        <div id="someChart">
+        <div>
+            <h6>{label}</h6>
+            <div id="someChart"></div>
         </div>
     )
 };

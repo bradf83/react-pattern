@@ -11,7 +11,7 @@ import * as d3 from 'd3';
  * @returns {*}
  * @constructor
  */
-const D3BarChart = ({chartId, data, width, height, dataMultiplier}) => {
+const D3BarChart = ({chartId, data, width, height, dataMultiplier, label}) => {
 
     const dataColours = [
         '#97233F', // Cardinals Red
@@ -50,7 +50,10 @@ const D3BarChart = ({chartId, data, width, height, dataMultiplier}) => {
     }, []);
 
     return (
-        <div id={chartId}/>
+        <div className="my-2">
+            <h6>{label}</h6>
+            <div id={chartId}/>
+        </div>
     )
 };
 
