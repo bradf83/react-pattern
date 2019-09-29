@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from "./components/Navbar";
 import PublicWelcome from "./components/PublicWelcome";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import Graph from "./components/Graph";
+import Charts from "./components/Charts";
 
 function App() {
     return (
@@ -10,7 +10,7 @@ function App() {
             <Navbar/>
             <Switch>
                 <Route exact={true} path="/" component={PublicWelcome}/>
-                <Route path="/graph" component={Graph}/>
+                <Route path="/charts" component={Charts}/>
             </Switch>
         </Router>
     );

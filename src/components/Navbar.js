@@ -48,8 +48,8 @@ const Navbar = ({location}) => {
                     <MainNavLink to="/" exact={true} handleNavigate={handleNavigate}>
                         Public Homepage
                     </MainNavLink>
-                    <MainNavLink to="/graph" handleNavigate={handleNavigate}>
-                        Graph
+                    <MainNavLink to="/charts" handleNavigate={handleNavigate}>
+                        Charts
                     </MainNavLink>
                 </div>
             </section>
