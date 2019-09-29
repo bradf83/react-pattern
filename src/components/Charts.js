@@ -23,22 +23,40 @@ const Charts = () => {
             </ul>
 
             <Switch>
-                <Route path="/charts/basic" render={() =>
-                    <D3BarChart label="Example of a basic bar chart" chartId="myChart" data={[12, 5, 6, 6, 9, 10]} width={700} height={150} dataMultiplier={10}/>
-                }/>
-                <Route path="/charts/basicScaled" render={() =>
-                    <D3BarChart label="Example of a basic bar chart, scaled slightly smaller" chartId="myChart2" data={[12, 5, 6, 6, 9, 10]} width={350} height={150} dataMultiplier={5}/>
-                }/>
+                <Route path="/charts/basic" component={Basic}/>
+                <Route path="/charts/basicScaled" component={BasicScaledSmaller}/>
                 <Route path="/charts/barWithDetails" render={() =>
                     <D3BarChartTwo label="Example of a bar chart with axes/labels/events"/>
                 }/>
             </Switch>
-
-
-
-
-
         </ContainerContent>
+    )
+};
+
+//TODO: Why was it not rendering properly with the code below.
+
+/*
+
+<Route path="/charts/basic" render={() =>
+    <D3BarChart label="Example of a basic bar chart" chartId="myChart" data={[12, 5, 6, 6, 9, 10]} width={700} height={150} dataMultiplier={10}/>
+}/>
+<Route path="/charts/basicScaled" render={() =>
+    <D3BarChart label="Example of a basic bar chart, scaled slightly smaller" chartId="myChart2" data={[12, 5, 6, 6, 9, 10]} width={350} height={150} dataMultiplier={5}/>
+}/>
+
+ */
+
+// Had to create this component wrappers other wise it was only rendering one of the basic charts, I must be doing something wrong, or misunderstanding something, previous route
+//  code can be found right above this.
+const Basic = () => {
+    return (
+        <D3BarChart label="Example of a basic bar chart" chartId="myChart" data={[12, 5, 6, 6, 9, 10]} width={700} height={150} dataMultiplier={10}/>
+    )
+};
+
+const BasicScaledSmaller = () => {
+    return (
+        <D3BarChart label="Example of a basic bar chart, scaled slightly smaller" chartId="tomo" data={[12, 5, 6, 6, 9, 10]} width={350} height={150} dataMultiplier={5}/>
     )
 };
 

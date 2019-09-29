@@ -8,6 +8,7 @@ import * as d3 from 'd3';
  * @param width - the width of the chart
  * @param height - the height of the chart
  * @param dataMultiplier - the multiplier for the data to make the chart bigger or smaller (revisit this)
+ * @param label - the heading for the chart
  * @returns {*}
  * @constructor
  */
