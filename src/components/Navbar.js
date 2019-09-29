@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {NavLink, withRouter} from "react-router-dom";
+import {withRouter} from "react-router-dom";
 import MainNavLink from "./MainNavLink";
 
 // TODO: Accessibility, I18N
