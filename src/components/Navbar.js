@@ -1,13 +1,23 @@
 import React, { useState } from 'react';
+import {NavLink, withRouter} from "react-router-dom";
+import MainNavLink from "./MainNavLink";
 
 // TODO: Accessibility, I18N
 //  Since I am just sliding the side menu out of view I believe its still accessible  is there a way to change that?
 
-const Navbar = () => {
+const Navbar = ({location}) => {
     const [navCollapsed, setNavCollapsed] = useState(true);
 
     const toggleCollapsed = () => {
         setNavCollapsed(current => !current);
+    };
+
+    // TODO: This feels clunky, maybe a different way to handle this?
+    const handleNavigate = (to) => {
+        // Only hide the menu if navigating
+        if(location.pathname !== to){
+            setNavCollapsed(true);
+        }
     };
 
     const collapsed = navCollapsed ? 'collapsed' : '';
@@ -35,10 +45,16 @@ const Navbar = () => {
                     <div className="list-group-item list-group-item-header">
                         React Patterns
                     </div>
+                    <MainNavLink to="/" exact={true} handleNavigate={handleNavigate}>
+                        Public Homepage
+                    </MainNavLink>
+                    <MainNavLink to="/graph" handleNavigate={handleNavigate}>
+                        Graph
+                    </MainNavLink>
                 </div>
             </section>
         </>
     )
 };
 
-export default Navbar;
+export default withRouter(Navbar);

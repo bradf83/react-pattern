@@ -1,13 +1,12 @@
 import React from 'react';
+import ContainerContent from "./ContainerContent";
 
 const PublicWelcome = () => {
     return (
-        <section className="my-2">
-            <div className="container">
-                <h5>Welcome</h5>
-                <p>Another React app!  Time to learn some more stuff.</p>
-            </div>
-        </section>
+        <ContainerContent>
+            <h5>Welcome</h5>
+            <p>Another React app!  Time to learn some more stuff.</p>
+        </ContainerContent>
     )
 };
 

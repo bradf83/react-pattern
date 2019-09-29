@@ -12,10 +12,8 @@ I have played around with React a fair amount now, so time to start over and do 
 
 ## Things To Do
 
-* Bootstrap (Just Plain)
 * Internationalization
 * Make directory structure
-* React Router (5.1.1+)
 * Testing (Mocking)
 * Add a title to the web app
 * Toasts
@@ -31,3 +29,8 @@ I have played around with React a fair amount now, so time to start over and do 
 * Storybook
 * React Helmet for <head> management
 * Change the FAV icon
+
+## Done
+* Added Bootstrap using CSS only so far
+* Created basic navigation.
+* React Router (5.1.1+)

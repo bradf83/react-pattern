@@ -101,17 +101,17 @@
       &.list-group-item-header {
         @extend .font-weight-bold;
         @extend .text-white;
-        background-color: $lions-silver; //TODO: Darker or another color?
+        background-color: darken($lions-silver, 30%);
         font-size: $h6-font-size;
       }
 
       &.list-group-item-action {
         &:hover {
-          background-color: red; //TODO: figure out the colour
+          background-color: darken($lions-silver, 10%);
         }
 
         &.active {
-          background-color: green; //TODO: figure out the colour
+          background-color: darken($lions-silver, 20%);
         }
 
         color: $white;
