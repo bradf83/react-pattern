@@ -21,6 +21,8 @@ I have played around with React a fair amount now, so time to start over and do 
 * API Files
 * Error Boundary
 * User Session
+* Check out ReCharts
+* Check out Victory Charts by Formidable.
 
 ## Later
 
@@ -34,3 +36,4 @@ I have played around with React a fair amount now, so time to start over and do 
 * Added Bootstrap using CSS only so far
 * Created basic navigation.
 * React Router (5.1.1+)
+* Built some charts using D3 manually
