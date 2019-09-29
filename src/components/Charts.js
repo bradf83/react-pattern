@@ -3,6 +3,7 @@ import ContainerContent from "./ContainerContent";
 import D3BarChart from "./d3/D3BarChart";
 import D3BarChartTwo from "./d3/D3BarChartTwo";
 import {NavLink, Route, Switch} from "react-router-dom";
+import TinyBar from "./rechart/TinyBar";
 
 
 const Charts = () => {
@@ -20,6 +21,9 @@ const Charts = () => {
                 <li className="nav-item">
                     <NavLink className="nav-link" to="/charts/barWithDetails">Bar Chart With Details</NavLink>
                 </li>
+                <li className="nav-item">
+                    <NavLink className="nav-link" to="/charts/rechartsTinyBar">ReCharts Tinybar</NavLink>
+                </li>
             </ul>
 
             <Switch>
@@ -28,7 +32,9 @@ const Charts = () => {
                 <Route path="/charts/barWithDetails" render={() =>
                     <D3BarChartTwo label="Example of a bar chart with axes/labels/events"/>
                 }/>
+                <Route path="/charts/rechartsTinyBar" component={TinyBar}/>
             </Switch>
+
         </ContainerContent>
     )
 };
