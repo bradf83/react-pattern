@@ -2,15 +2,42 @@ import React from 'react';
 import ContainerContent from "./ContainerContent";
 import D3BarChart from "./d3/D3BarChart";
 import D3BarChartTwo from "./d3/D3BarChartTwo";
+import {NavLink, Route, Switch} from "react-router-dom";
 
 
 const Charts = () => {
     return (
         <ContainerContent>
             <h5>Charts</h5>
-            <D3BarChart label="Example of a basic bar chart" chartId="myChart" data={[12, 5, 6, 6, 9, 10]} width={700} height={150} dataMultiplier={10}/>
-            <D3BarChart label="Example of a basic bar chart, scaled slightly smaller" chartId="myChart2" data={[12, 5, 6, 6, 9, 10]} width={350} height={150} dataMultiplier={5}/>
-            <D3BarChartTwo label="Example of a bar chart with axes/labels/events"/>
+            <p>Please select a chart below.</p>
+            <ul className="nav nav-pills nav-fill">
+                <li className="nav-item">
+                    <NavLink className="nav-link" to="/charts/basic">Basic Bar Chart</NavLink>
+                </li>
+                <li className="nav-item">
+                    <NavLink className="nav-link" to="/charts/basicScaled">Basic Bar Chart Scaled Smaller</NavLink>
+                </li>
+                <li className="nav-item">
+                    <NavLink className="nav-link" to="/charts/barWithDetails">Bar Chart With Details</NavLink>
+                </li>
+            </ul>
+
+            <Switch>
+                <Route path="/charts/basic" render={() =>
+                    <D3BarChart label="Example of a basic bar chart" chartId="myChart" data={[12, 5, 6, 6, 9, 10]} width={700} height={150} dataMultiplier={10}/>
+                }/>
+                <Route path="/charts/basicScaled" render={() =>
+                    <D3BarChart label="Example of a basic bar chart, scaled slightly smaller" chartId="myChart2" data={[12, 5, 6, 6, 9, 10]} width={350} height={150} dataMultiplier={5}/>
+                }/>
+                <Route path="/charts/barWithDetails" render={() =>
+                    <D3BarChartTwo label="Example of a bar chart with axes/labels/events"/>
+                }/>
+            </Switch>
+
+
+
+
+
         </ContainerContent>
     )
 };

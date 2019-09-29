@@ -126,7 +126,7 @@ const D3BarChartTwo = ({label}) => {
     const detailString = details === null ? 'Click on a bar below to display the details.' : `The ${details.language} programming language is liked by ${details.value}% of people.`;
 
     return (
-        <div>
+        <div className="my-2">
             <h6>{label}</h6>
             <p>{detailString}</p>
             <div id="someChart"></div>
