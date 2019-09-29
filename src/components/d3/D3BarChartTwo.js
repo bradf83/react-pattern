@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import * as d3 from 'd3';
 
 /**
@@ -9,6 +9,8 @@ import * as d3 from 'd3';
  */
 
 const D3BarChartTwo = ({label}) => {
+    const [details, setDetails] = useState(null);
+
 
     const dataColours = [
         '#97233F', // Cardinals Red
@@ -75,6 +77,7 @@ const D3BarChartTwo = ({label}) => {
             .attr("fill", (d, i) => dataColours[i]) // Select a colour from our predefined colours
             .on('click', function(actual, i){
                 alert(`The ${actual.language} programming language is liked by ${actual.value}% of people.`);
+                setDetails(sample[i]);
             });
 
         // Grid lines for the X Axis
@@ -120,9 +123,12 @@ const D3BarChartTwo = ({label}) => {
         drawChart();
     }, []);
 
+    const detailString = details === null ? 'Click on a bar below to display the details.' : `The ${details.language} programming language is liked by ${details.value}% of people.`;
+
     return (
         <div>
             <h6>{label}</h6>
+            <p>{detailString}</p>
             <div id="someChart"></div>
         </div>
     )
