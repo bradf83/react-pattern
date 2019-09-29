@@ -1,8 +1,13 @@
 import React from 'react';
+import Navbar from "./components/Navbar";
+import PublicWelcome from "./components/PublicWelcome";
 
 function App() {
   return (
-      <h1>Fresh Start</h1>
+      <>
+        <Navbar/>
+        <PublicWelcome/>
+      </>
   );
 }
 

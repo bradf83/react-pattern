@@ -29,3 +29,5 @@ I have played around with React a fair amount now, so time to start over and do 
 * Font Awesome
 * Lodash
 * Storybook
+* React Helmet for <head> management
+* Change the FAV icon

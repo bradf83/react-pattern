@@ -1,0 +1,121 @@
+.navbar-main {
+  @extend .justify-content-start;
+  @extend .navbar;
+  @extend .navbar-dark;
+  background-color: $lions-blue;
+
+  .navbar-toggler {
+    border-color: $lions-silver;
+
+    /* remove the blue outline when active or focused */
+    &:active, &:focus {
+      outline: 0;
+    }
+
+    .icon-bar {
+      background: $white;
+      display: block;
+      width: 24px;
+      height: 3px;
+      border-radius: 1px;
+      margin: 4px 0 4px 0;
+      transition: all 0.4s;
+
+      /* .navbar open top .icon-bar rotated down 45° */
+      &:nth-of-type(1) {
+        transform: rotate(45deg);
+        transform-origin: 4px 6px;
+      }
+
+      /* .navbar open middle .icon-bar invisible */
+      &:nth-of-type(2) {
+        opacity: 0;
+        filter: alpha(opacity=0);
+      }
+
+      /* .navbar open bottom .icon-bar rotated up 45° */
+      &:nth-of-type(3) {
+        transform: rotate(-45deg);
+        transform-origin: 4px -2px;
+      }
+
+    }
+
+    /* styles for when .navbar is closed */
+    &.collapsed {
+
+      .icon-bar {
+
+        /* .navbar closed top .icon-bar no rotation - straight */
+        &:nth-of-type(1) {
+          transform: rotate(0);
+        }
+
+        /* .navbar closed middle .icon-bar visible */
+        &:nth-of-type(2) {
+          opacity: 1;
+          filter: alpha(opacity=100);
+        }
+
+        /* .navbar closed bottom .icon-bar no rotation - straight */
+        &:nth-of-type(3) {
+          transform: rotate(0);
+        }
+      }
+    }
+  }
+}
+
+.navbar-side {
+  @extend .h-100;
+  @extend .overflow-auto;
+  background-color: $lions-blue;
+  border-top-color: $lions-silver;
+  border-top-style: solid;
+  border-top-width: 1px;
+  left: 0;
+  position: fixed;
+  top: 51px;
+  width: 300px;
+  z-index: $zindex-fixed;
+  transition: all 1s;
+
+  &.collapsed {
+    left: -300px;
+  }
+
+  > .list-group {
+    @extend .list-group-flush;
+    @extend .font-weight-bold;
+    color: $lions-silver;
+
+    > button {
+      @extend .font-weight-bold;
+      color: $lions-silver;
+      outline: 0;
+    }
+
+    > .list-group-item {
+      background-color: $lions-silver;
+
+      &.list-group-item-header {
+        @extend .font-weight-bold;
+        @extend .text-white;
+        background-color: $lions-silver; //TODO: Darker or another color?
+        font-size: $h6-font-size;
+      }
+
+      &.list-group-item-action {
+        &:hover {
+          background-color: red; //TODO: figure out the colour
+        }
+
+        &.active {
+          background-color: green; //TODO: figure out the colour
+        }
+
+        color: $white;
+      }
+    }
+  }
+}

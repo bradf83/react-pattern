@@ -2,6 +2,9 @@
 // https://getbootstrap.com/docs/4.3/content/typography/#responsive-font-sizes
 $enable-responsive-font-sizes: true;
 
+$lions-blue: #0076B6;
+$lions-silver: #B0B7BC;
+
 /* Bootstrap 4 Overrides
  -------------------------------------------------------------------------------------------------------------------- */
 
@@ -9,16 +12,16 @@ $enable-responsive-font-sizes: true;
 //$colors: () !default;
 
 // TODO: Add theme here
-//$theme-colors: (
-//        "primary": ,
-//        "secondary": ,
+$theme-colors: (
+        "primary": $lions-blue,
+        "secondary": $lions-silver,
 //        "success": ,
 //        "info": ,
 //        "warning": ,
 //        "danger": ,
 //        "light": ,
 //        "dark": ,
-//) !default;
+) !default;
 
 //$link-color: ;
 
