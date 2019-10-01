@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@nivo/bar": "^0.59.2",
     "bootstrap": "^4.3.1",
     "d3": "^5.12.0",
     "node-sass": "^4.12.0",

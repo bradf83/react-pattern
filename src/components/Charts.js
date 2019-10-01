@@ -5,6 +5,7 @@ import D3BarChartTwo from "./d3/D3BarChartTwo";
 import {NavLink, Route, Switch} from "react-router-dom";
 import TinyBar from "./rechart/TinyBar";
 import HorizontalBar from "./rechart/HorizontalBar";
+import HorizontalBarChart from "./nivo/HorizontalBarChart";
 
 
 const Charts = () => {
@@ -28,6 +29,9 @@ const Charts = () => {
                 <li className="nav-item">
                     <NavLink className="nav-link" to="/charts/rechartsHorizontalBar">Recharts Horizontal Bar</NavLink>
                 </li>
+                <li className="nav-item">
+                    <NavLink className="nav-link" to="/charts/nivoHorizontalBar">Nivo Horizontal Bar</NavLink>
+                </li>
             </ul>
 
             <Switch>
@@ -38,8 +42,8 @@ const Charts = () => {
                 }/>
                 <Route path="/charts/rechartsTinyBar" component={TinyBar}/>
                 <Route path="/charts/rechartsHorizontalBar" component={HorizontalBar}/>
+                <Route path="/charts/nivoHorizontalBar" component={HorizontalBarChart}/>
             </Switch>
-
         </ContainerContent>
     )
 };

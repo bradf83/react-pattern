@@ -15,7 +15,7 @@ I have played around with React a fair amount now, so time to start over and do 
 * Internationalization
   * Two options it seems [react-intl](https://github.com/formatjs/react-intl) and [i18next](https://react.i18next.com/)
 * Testing (Mocking)
-* Add a title to the web app.  [React Helmet](https://github.com/nfl/react-helmet)
+* Add a title to the web app.  [React Helmet](https://github.com/nfl/react-helmet) or [React Titled](https://github.com/tajo/react-titled)
 * Toasts [React-Toastify](https://fkhadra.github.io/react-toastify/) or [Bootstrap Toasts](https://getbootstrap.com/docs/4.3/components/toasts/)
 * Okta [Okta-React](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-react)
 * API Files
@@ -37,3 +37,4 @@ I have played around with React a fair amount now, so time to start over and do 
 * React Router (5.1.1+)
 * Built some charts using D3 manually
 * Built some charts using Rechart
+* Built some charts using Nivo
