@@ -3,15 +3,14 @@ import {Redirect, Route, Switch, useHistory, useLocation} from "react-router-dom
 import One from "./One";
 import Two from "./Two";
 import queryString from 'query-string';
-import Description from "./Description";
 
 const Visualization = () => {
     let location = useLocation();
     let history = useHistory();
 
     //TODO: Bugs
-    // product query param not coming in
-    // not updating query params in all cases
+    // product query param not coming in √
+    // not updating query params in all cases √
 
     //TODO: Query Param Questions ( ALT + 251)
     // On load wait for months to load √
@@ -26,63 +25,101 @@ const Visualization = () => {
     const [render, setRender] = useState(false);
     const [cardLayout, setCardLayout] = useState(true);
 
+    const [mounted, setMounted] = useState(false);
+
+    /*
+    * Initialize state and set mounted to true
+    * - Take in query params and set form state
+    */
     useEffect(() => {
-        //TODO: replace with real API
-        const options = [
+        console.log('Initialize', mounted);
+        //TODO: Async call
+        // Load State on mount;
+        const monthOptions = [
             {value: '2019-01', label: 'January 2019'},
             {value: '2019-02', label: 'February 2019'}
         ];
+        let selectedMonth = '';
 
-        setMonthOptions(options);
-
-        if(options.length > 0){
+        if(monthOptions.length > 0){
             let queryParams = queryString.parse(location.search);
 
             if(queryParams.month !== undefined){
-                let found = options.find(option => option.value === queryParams.month);
+                let found = monthOptions.find(option => option.value === queryParams.month);
                 if(found !== undefined){
-                    setMonth(queryParams.month);
+                    selectedMonth = queryParams.month;
                 }
             }
         }
-    }, []); // Load months once on load
 
-    useEffect(() => {
-        if(month !== ''){
-            //TODO: Real API
-            let options = [];
-            if(month === '2019-01'){
-                options.push({value: '1', label: 'Crayons'});
-                options.push({value: '2', label: 'Pencils'});
-            }
-            if(month === '2019-02'){
-                options.push({value: '2', label: 'Pencils'});
-                options.push({value: '3', label: 'Pens'});
-            }
-            setProductOptions(options);
+        let productOptions = [];
+        if(selectedMonth === '2019-01'){
+            productOptions.push({value: '1', label: 'Crayons'});
+            productOptions.push({value: '2', label: 'Pencils'});
+        }
+        if(selectedMonth === '2019-02'){
+            productOptions.push({value: '2', label: 'Pencils'});
+            productOptions.push({value: '3', label: 'Pens'});
+        }
+        let selectedProduct = '';
 
-            if(options.length > 0){
-                let queryParams = queryString.parse(location.search);
-                if(queryParams.product !== undefined){
-                    let found = options.find(option => option.value === queryParams.product);
-                    if(found !== undefined){
-                        setProduct(queryParams.product);
-                        // TODO: If came from URL/Bookmark it would be nice to fire a render here.
-                    }
+        if(productOptions.length > 0){
+            let queryParams = queryString.parse(location.search);
+            if(queryParams.product !== undefined){
+                let found = productOptions.find(option => option.value === queryParams.product);
+                if(found !== undefined){
+                    selectedProduct = queryParams.product;
                 }
             }
-        } else {
-            setProduct('');
-            setProductOptions([]);
+        }
+
+        // This is a little different than an API will work but same idea
+        console.log(selectedMonth, selectedProduct, mounted);
+        setMonthOptions(monthOptions);
+        setMonth(selectedMonth);
+        setProductOptions(productOptions);
+        setProduct(selectedProduct);
+        //TODO: Determine render from query parameter.
+        setMounted(true);
+
+    }, []);
+
+    /*
+    * Update product list when the month changes
+    */
+    useEffect(() => {
+        if(mounted) {
+            if (month !== '') {
+
+                //TODO: Preserve product value and reselect it if present in new list.
+
+                //TODO: Real API
+                let options = [];
+                if (month === '2019-01') {
+                    options.push({value: '1', label: 'Crayons'});
+                    options.push({value: '2', label: 'Pencils'});
+                }
+                if (month === '2019-02') {
+                    options.push({value: '2', label: 'Pencils'});
+                    options.push({value: '3', label: 'Pens'});
+                }
+                setProductOptions(options);
+            } else {
+                setProduct('');
+                setProductOptions([]);
+            }
         }
     }, [month]); // Do anytime the month changes
 
-    // useEffect(() => {
-    //     history.push({
-    //         pathname: location.pathname,
-    //         search: `?month=${month}&product=${product}` // TODO: Make this smarter
-    //     });
-    // }, [month, product]);
+    useEffect(() => {
+        if(mounted) {
+            //TODO: Determine if render should be enabled.
+            history.push({
+                pathname: location.pathname,
+                search: `?month=${month}&product=${product}` // TODO: Make this smarter
+            });
+        }
+    }, [month, product]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
