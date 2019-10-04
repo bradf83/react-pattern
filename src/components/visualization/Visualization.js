@@ -102,7 +102,7 @@ const Visualization = () => {
         <>
             {!cardLayout && (
                 <>
-                    <section className="mt-1">
+                    <section className="mt-2">
                         <div className="container">
                             <nav className="navbar navbar-dark bg-dark justify-content-between rounded-lg">
                                 <div className="form-inline">
