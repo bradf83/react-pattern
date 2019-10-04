@@ -51,6 +51,15 @@ const Navbar = ({location}) => {
                     <MainNavLink to="/charts" handleNavigate={handleNavigate}>
                         Charts
                     </MainNavLink>
+                    <MainNavLink to="/visualization" exact={true} handleNavigate={handleNavigate}>
+                        Visualization
+                    </MainNavLink>
+                    <MainNavLink to="/visualization/one" handleNavigate={handleNavigate}>
+                        Visualization One
+                    </MainNavLink>
+                    <MainNavLink to="/visualization/two" handleNavigate={handleNavigate}>
+                        Visualization Two
+                    </MainNavLink>
                 </div>
             </section>
         </>
