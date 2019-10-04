@@ -76,12 +76,14 @@
   left: 0;
   position: fixed;
   top: 51px;
+  visibility: visible;
   width: 300px;
   z-index: $zindex-fixed;
   transition: all 1s;
 
   &.collapsed {
     left: -300px;
+    visibility: hidden;
   }
 
   > .list-group {
