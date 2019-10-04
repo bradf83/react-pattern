@@ -1,20 +1,31 @@
 import React, {useEffect, useState} from 'react';
 import Description from "./Description";
 import {Pie, PieChart} from "recharts";
+import Loading from "./Loading";
+import NoData from "./NoData";
 
 const Two = ({month, product}) => {
     const [data, setData] = useState(undefined);
     useEffect(() => {
-        setData([
-            {label: 'Red', amount: 10},
-            {label: 'Blue', amount: 5},
-            {label: 'Orange', amount: 20},
-            {label: 'Green', amount: 44}
-        ]);
+        // Example of no data returned
+        if(product === '3'){
+            setData([]);
+        } else {
+            setData([
+                {label: 'Red', amount: Math.round(Math.random() * 100)},
+                {label: 'Blue', amount: Math.round(Math.random() * 100)},
+                {label: 'Orange', amount: Math.round(Math.random() * 100)},
+                {label: 'Green', amount: Math.round(Math.random() * 100)}
+            ]);
+        }
     }, [month, product]);
 
     if(data === undefined){
-        return (<div>Loading...</div>)
+        return (<Loading/>)
+    }
+
+    if(data.length === 0){
+        return (<NoData/>)
     }
 
     return (

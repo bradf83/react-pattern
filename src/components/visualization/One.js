@@ -1,21 +1,27 @@
 import React, {useEffect, useState} from 'react';
 import Description from "./Description";
 import {Bar, BarChart, XAxis, YAxis} from "recharts";
+import Loading from "./Loading";
+import NoData from "./NoData";
 
 const One = ({month, product}) => {
     const [data, setData] = useState(undefined);
     useEffect(() => {
         // TODO: Data based on params
         setData([
-            {label: 'Red', amount: 10},
-            {label: 'Blue', amount: 5},
-            {label: 'Orange', amount: 20},
-            {label: 'Green', amount: 44}
+            {label: 'Red', amount: Math.round(Math.random() * 100)},
+            {label: 'Blue', amount: Math.round(Math.random() * 100)},
+            {label: 'Orange', amount: Math.round(Math.random() * 100)},
+            {label: 'Green', amount: Math.round(Math.random() * 100)}
         ]);
-    }, [month, product]); // TODO: Changing based on month/product change, instead want to change based on Render Click
+    }, [month, product]);
 
     if(data === undefined){
-        return (<div>Loading...</div>) // TODO: Custom loading component
+        return (<Loading/>)
+    }
+
+    if(data.length === 0){
+        return (<NoData/>)
     }
 
     return (

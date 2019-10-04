@@ -1,24 +1,28 @@
 import React, {useState, useEffect} from 'react';
-import {Route, Switch, useLocation} from "react-router-dom";
+import {Redirect, Route, Switch, useHistory, useLocation} from "react-router-dom";
 import One from "./One";
 import Two from "./Two";
 import queryString from 'query-string';
 
 const Visualization = () => {
     let location = useLocation();
+    let history = useHistory();
+
+    //TODO: Bugs
+    // product query param not coming in
+    // not updating query params in all cases
 
     //TODO: Query Param Questions ( ALT + 251)
     // On load wait for months to load √
     // If query month is found in months then load products for month √
     // If query product is found then load visualization  √
-    // What to do if query param is not in select list. Don't render the visualization, info message shown
-    // How to update query params?
 
     //TODO: Switch to Reducer Pattern
     const [month, setMonth] = useState('');
     const [monthOptions, setMonthOptions] = useState([]);
     const [product, setProduct] = useState('');
     const [productOptions, setProductOptions] = useState([]);
+    const [render, setRender] = useState(false);
 
     useEffect(() => {
         //TODO: replace with real API
@@ -65,14 +69,32 @@ const Visualization = () => {
                     }
                 }
             }
+        } else {
+            setProduct('');
+            setProductOptions([]);
         }
     }, [month]); // Do anytime the month changes
 
+    // useEffect(() => {
+    //     history.push({
+    //         pathname: location.pathname,
+    //         search: `?month=${month}&product=${product}` // TODO: Make this smarter
+    //     });
+    // }, [month, product]);
+
     const handleSubmit = (event) => {
         event.preventDefault();
+        if(!(month === '' || product === '')){
+            setRender(true);
+        }
     };
 
-    const missingParams = month === '' || product === '';
+    const handleChange = (event, setter) => {
+        setter(event.target.value);
+        setRender(false);
+    };
+
+    const missingParams = month === '' || product === '' || render === false;
 
     return (
         <>
@@ -80,13 +102,13 @@ const Visualization = () => {
                 <div className="container">
                     <nav className="navbar navbar-dark bg-dark justify-content-end rounded-lg">
                         <form className="form-inline" onSubmit={handleSubmit}>
-                            <select className="form-control mr-2" autoFocus={true} value={month} onChange={(event) => setMonth(event.target.value)}>
+                            <select className="form-control mr-2" autoFocus={true} value={month} onChange={(event) => handleChange(event, setMonth)}>
                                 <option value="">Select a Month</option>
                                 {monthOptions.map(option =>
                                     <option key={option.value} value={option.value}>{option.label}</option>
                                 )}
                             </select>
-                            <select className="form-control mr-2" value={product} onChange={(event) => setProduct(event.target.value)}>
+                            <select className="form-control mr-2" value={product} onChange={(event) => handleChange(event, setProduct)}>
                                 <option value="">Select a Product</option>
                                 {productOptions.map(option =>
                                     <option key={option.value} value={option.value}>{option.label}</option>
@@ -113,6 +135,8 @@ const Visualization = () => {
                             <Route path="/visualization/two">
                                 <Two month={month} product={product}/>
                             </Route>
+                            {/* If the path is wrong or they are at the root then redirect to visualization one*/}
+                            <Redirect to="/visualization/one"/>
                         </Switch>
                     )}
                 </div>
