@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Route, Switch, useLocation, useParams} from "react-router-dom";
+import {Route, Switch, useLocation} from "react-router-dom";
 import One from "./One";
 import Two from "./Two";
 import queryString from 'query-string';
@@ -7,7 +7,7 @@ import queryString from 'query-string';
 const Visualization = () => {
     let location = useLocation();
 
-    //TODO: Query Param Questions
+    //TODO: Query Param Questions ( ALT + 251)
     // On load wait for months to load √
     // If query month is found in months then load products for month √
     // If query product is found then load visualization  √
@@ -72,6 +72,8 @@ const Visualization = () => {
         event.preventDefault();
     };
 
+    const missingParams = month === '' || product === '';
+
     return (
         <>
             <section className="mt-1">
@@ -98,20 +100,21 @@ const Visualization = () => {
 
             <section className="mt-1">
                 <div className="container">
-                    <Switch>
-                        <Route path="/visualization/one">
-                            <One month={month} product={product}/>
-                        </Route>
-                        <Route path="/visualization/two">
-                            <Two month={month} product={product}/>
-                        </Route>
-                        <Route>
-                            <div className="alert alert-info">
-                                Please select a month and product above and press <em>Render</em>.
-                            </div>
-                        </Route>
-                    </Switch>
-
+                    {missingParams && (
+                        <div className="alert alert-info">
+                            Please select a month and product above and press <em>Render</em>.
+                        </div>
+                    )}
+                    {!missingParams && (
+                        <Switch>
+                            <Route path="/visualization/one">
+                                <One month={month} product={product}/>
+                            </Route>
+                            <Route path="/visualization/two">
+                                <Two month={month} product={product}/>
+                            </Route>
+                        </Switch>
+                    )}
                 </div>
             </section>
         </>
