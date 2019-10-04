@@ -3,6 +3,7 @@ import {Redirect, Route, Switch, useHistory, useLocation} from "react-router-dom
 import One from "./One";
 import Two from "./Two";
 import queryString from 'query-string';
+import Description from "./Description";
 
 const Visualization = () => {
     let location = useLocation();
@@ -23,6 +24,7 @@ const Visualization = () => {
     const [product, setProduct] = useState('');
     const [productOptions, setProductOptions] = useState([]);
     const [render, setRender] = useState(false);
+    const [cardLayout, setCardLayout] = useState(true);
 
     useEffect(() => {
         //TODO: replace with real API
@@ -98,49 +100,132 @@ const Visualization = () => {
 
     return (
         <>
-            <section className="mt-1">
-                <div className="container">
-                    <nav className="navbar navbar-dark bg-dark justify-content-end rounded-lg">
-                        <form className="form-inline" onSubmit={handleSubmit}>
-                            <select className="form-control mr-2" autoFocus={true} value={month} onChange={(event) => handleChange(event, setMonth)}>
-                                <option value="">Select a Month</option>
-                                {monthOptions.map(option =>
-                                    <option key={option.value} value={option.value}>{option.label}</option>
-                                )}
-                            </select>
-                            <select className="form-control mr-2" value={product} onChange={(event) => handleChange(event, setProduct)}>
-                                <option value="">Select a Product</option>
-                                {productOptions.map(option =>
-                                    <option key={option.value} value={option.value}>{option.label}</option>
-                                )}
-                            </select>
-                            <button className="btn btn-primary">Render</button>
-                        </form>
-                    </nav>
-                </div>
-            </section>
-
-            <section className="mt-1">
-                <div className="container">
-                    {missingParams && (
-                        <div className="alert alert-info">
-                            Please select a month and product above and press <em>Render</em>.
+            {!cardLayout && (
+                <>
+                    <section className="mt-1">
+                        <div className="container">
+                            <nav className="navbar navbar-dark bg-dark justify-content-between rounded-lg">
+                                <div className="form-inline">
+                                    <div className="custom-control custom-checkbox">
+                                        <input type="checkbox" className="custom-control-input" checked={cardLayout} onChange={() => setCardLayout(current => !current)}
+                                               id="js-card-layout"/>
+                                        <label className="custom-control-label text-white" htmlFor="js-card-layout">Use card layout?</label>
+                                    </div>
+                                </div>
+                                <form className="form-inline" onSubmit={handleSubmit}>
+                                    <select className="form-control mr-2" autoFocus={true} value={month} onChange={(event) => handleChange(event, setMonth)}>
+                                        <option value="">Select a Month</option>
+                                        {monthOptions.map(option =>
+                                            <option key={option.value} value={option.value}>{option.label}</option>
+                                        )}
+                                    </select>
+                                    <select className="form-control mr-2" value={product} onChange={(event) => handleChange(event, setProduct)}>
+                                        <option value="">Select a Product</option>
+                                        {productOptions.map(option =>
+                                            <option key={option.value} value={option.value}>{option.label}</option>
+                                        )}
+                                    </select>
+                                    <button className="btn btn-primary">Render</button>
+                                </form>
+                            </nav>
                         </div>
-                    )}
-                    {!missingParams && (
-                        <Switch>
-                            <Route path="/visualization/one">
-                                <One month={month} product={product}/>
-                            </Route>
-                            <Route path="/visualization/two">
-                                <Two month={month} product={product}/>
-                            </Route>
-                            {/* If the path is wrong or they are at the root then redirect to visualization one*/}
-                            <Redirect to="/visualization/one"/>
-                        </Switch>
-                    )}
-                </div>
-            </section>
+                    </section>
+
+                    <section className="mt-1">
+                        <div className="container">
+                            {missingParams && (
+                                <div className="alert alert-info">
+                                    Please select a month and product above and press <em>Render</em>.
+                                </div>
+                            )}
+                            {!missingParams && (
+                                <Switch>
+                                    <Route path="/visualization/one">
+                                        <One month={month} product={product}/>
+                                    </Route>
+                                    <Route path="/visualization/two">
+                                        <Two month={month} product={product}/>
+                                    </Route>
+                                    {/* If the path is wrong or they are at the root then redirect to visualization one*/}
+                                    <Redirect to="/visualization/one"/>
+                                </Switch>
+                            )}
+                        </div>
+                    </section>
+                </>
+            )}
+
+            {cardLayout && (
+                <>
+                    {/* Render using a card */}
+
+                    <section className="mt-2">
+                        <div className="container">
+                            <div className="card">
+                                <div className="card-header bg-dark text-white d-flex justify-content-between">
+                                    <div className="form-inline">
+                                        <div className="custom-control custom-checkbox mr-sm-2">
+                                            <input type="checkbox" className="custom-control-input" checked={cardLayout} onChange={() => setCardLayout(current => !current)}
+                                                   id="js-card-layout"/>
+                                                <label className="custom-control-label"
+                                                       htmlFor="js-card-layout">Use card layout?</label>
+                                        </div>
+                                    </div>
+                                    <form className="form-inline" onSubmit={handleSubmit}>
+                                        <select className="form-control mr-2" autoFocus={true} value={month} onChange={(event) => handleChange(event, setMonth)}>
+                                            <option value="">Select a Month</option>
+                                            {monthOptions.map(option =>
+                                                <option key={option.value} value={option.value}>{option.label}</option>
+                                            )}
+                                        </select>
+                                        <select className="form-control mr-2" value={product} onChange={(event) => handleChange(event, setProduct)}>
+                                            <option value="">Select a Product</option>
+                                            {productOptions.map(option =>
+                                                <option key={option.value} value={option.value}>{option.label}</option>
+                                            )}
+                                        </select>
+                                        <button className="btn btn-primary">Render</button>
+                                    </form>
+                                </div>
+                                <div className="card-body">
+                                    {missingParams && (
+                                        <div className="alert alert-info">
+                                            Please select a month and product above and press <em>Render</em>.
+                                        </div>
+                                    )}
+                                    {!missingParams && (
+                                        <Switch>
+                                            <Route path="/visualization/one">
+                                                <One month={month} product={product} showDescription={false}/>
+                                            </Route>
+                                            <Route path="/visualization/two">
+                                                <Two month={month} product={product} showDescription={false}/>
+                                            </Route>
+                                            {/* If the path is wrong or they are at the root then redirect to visualization one*/}
+                                            <Redirect to="/visualization/one"/>
+                                        </Switch>
+                                    )}
+                                </div>
+                                <div className="card-footer text-muted">
+                                    <Switch>
+                                        <Route path="/visualization/one">
+                                            <h6>Description One</h6>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad animi distinctio ducimus earum, eligendi minus nihil non perspiciatis quo veritatis? Ab consectetur dolores eum expedita nemo voluptas voluptates! Repudiandae, sint!</p>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad animi distinctio ducimus earum, eligendi minus nihil non perspiciatis quo veritatis? Ab consectetur dolores eum expedita nemo voluptas voluptates! Repudiandae, sint!</p>
+                                        </Route>
+                                        <Route path="/visualization/two">
+                                            <h6>Description Two</h6>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad animi distinctio ducimus earum, eligendi minus nihil non perspiciatis quo veritatis? Ab consectetur dolores eum expedita nemo voluptas voluptates! Repudiandae, sint!</p>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad animi distinctio ducimus earum, eligendi minus nihil non perspiciatis quo veritatis? Ab consectetur dolores eum expedita nemo voluptas voluptates! Repudiandae, sint!</p>
+                                        </Route>
+                                        <Route/>
+                                    </Switch>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </>
+            )}
         </>
     )
 };

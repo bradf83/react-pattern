@@ -4,7 +4,7 @@ import {Bar, BarChart, XAxis, YAxis} from "recharts";
 import Loading from "./Loading";
 import NoData from "./NoData";
 
-const One = ({month, product}) => {
+const One = ({month, product, showDescription = true}) => {
     const [data, setData] = useState(undefined);
     useEffect(() => {
         // TODO: Data based on params
@@ -32,7 +32,9 @@ const One = ({month, product}) => {
                 <YAxis type="category" dataKey="label"/>
                 <Bar dataKey="amount" fill="#8884d8" barSize={10} />
             </BarChart>
-            <Description name="Something One"/>
+            {showDescription && (
+                <Description name="Something One"/>
+            )}
         </>
     )
 };
