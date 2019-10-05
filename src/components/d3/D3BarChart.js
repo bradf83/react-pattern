@@ -48,6 +48,7 @@ const D3BarChart = ({chartId, data, width, height, dataMultiplier, label}) => {
     // Only draw the chart on mount
     useEffect(() => {
         drawChart();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

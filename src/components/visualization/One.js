@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import Description from "./Description";
 import {Bar, BarChart, XAxis, YAxis} from "recharts";
 import Loading from "./Loading";
 import NoData from "./NoData";
 
-const One = ({month, product, showDescription = true}) => {
+const One = ({month, product}) => {
     const [data, setData] = useState(undefined);
     useEffect(() => {
         // TODO: Data based on params
@@ -32,9 +31,6 @@ const One = ({month, product, showDescription = true}) => {
                 <YAxis type="category" dataKey="label"/>
                 <Bar dataKey="amount" fill="#8884d8" barSize={10} />
             </BarChart>
-            {showDescription && (
-                <Description name="Something One"/>
-            )}
         </>
     )
 };

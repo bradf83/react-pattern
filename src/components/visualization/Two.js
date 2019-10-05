@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import Description from "./Description";
 import {Pie, PieChart} from "recharts";
 import Loading from "./Loading";
 import NoData from "./NoData";
 
-const Two = ({month, product, showDescription = true}) => {
+const Two = ({month, product}) => {
     const [data, setData] = useState(undefined);
     useEffect(() => {
         // Example of no data returned
@@ -34,10 +33,6 @@ const Two = ({month, product, showDescription = true}) => {
             <PieChart width={500} height={300}>
                 <Pie dataKey="amount" nameKey="label" data={data} label={true} fill="#0076B6"/>
             </PieChart>
-            {showDescription && (
-                <Description name="Something Two"/>
-            )}
-
         </>
     )
 };

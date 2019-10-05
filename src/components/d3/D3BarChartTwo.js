@@ -121,6 +121,7 @@ const D3BarChartTwo = ({label}) => {
 
     useEffect(() => {
         drawChart();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const detailString = details === null ? 'Click on a bar below to display the details.' : `The ${details.language} programming language is liked by ${details.value}% of people.`;
