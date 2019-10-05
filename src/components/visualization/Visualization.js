@@ -2,7 +2,39 @@ import React, {useEffect, useReducer} from 'react';
 import {Redirect, Route, Switch, useHistory, useLocation} from "react-router-dom";
 import One from "./One";
 import Two from "./Two";
-import queryString from 'query-string';
+
+/**
+ * Build fake product options based on the month passed in
+ * @param month
+ * @returns {Array}
+ */
+const determineFakeApiOptions = (month) => {
+    let options = [];
+    if (month === '2019-01') {
+        options.push({value: '1', label: 'Crayons'});
+        options.push({value: '2', label: 'Pencils'});
+    }
+    if (month === '2019-02') {
+        options.push({value: '2', label: 'Pencils'});
+        options.push({value: '3', label: 'Pens'});
+    }
+    return options;
+};
+
+/**
+ * Return the valueToFind if an option with the valueProp is found in the list. Escapes early if the options list
+ * is undefined or empty.  Also escapes early if the valueToFind is undefined or empty string.
+ * @param options - an array of options.
+ * @param valueToFind - the value to find in the list.
+ * @param valueProp - default 'value' can be changed if needed.
+ * @returns {string}
+ */
+const selectedOptionIfExists = (options, valueToFind, valueProp = 'value') => {
+    if(options === undefined || options.length === 0  || valueToFind === undefined || valueToFind === ''){
+        return '';
+    }
+    return options.find(option => option[valueProp] === valueToFind) !== undefined ? valueToFind : '';
+};
 
 const Visualization = () => {
     let location = useLocation();
@@ -19,6 +51,8 @@ const Visualization = () => {
 
     //TODO: Switch to Reducer Pattern √
 
+    // TODO: use UrlSearchParams instead of queryString √
+
     /**
      * Initial state
      * @type {{product: string, productOptions: Array, month: string, monthOptions: Array, render: boolean, mounted: boolean}}
@@ -30,21 +64,6 @@ const Visualization = () => {
         productOptions: [],
         render: false,
         mounted: false,
-    };
-
-    /**
-     * Return the valueToFind if an option with the valueProp is found in the list. Escapes early if the options list
-     * is undefined or empty.  Also escapes early if the valueToFind is undefined or empty string.
-     * @param options - an array of options.
-     * @param valueToFind - the value to find in the list.
-     * @param valueProp - default 'value' can be changed if needed.
-     * @returns {string}
-     */
-    const selectedOptionIfExists = (options, valueToFind, valueProp = 'value') => {
-        if(options === undefined || options.length === 0  || valueToFind === undefined || valueToFind === ''){
-            return '';
-        }
-        return options.find(option => option[valueProp] === valueToFind) !== undefined ? valueToFind : '';
     };
 
     function reducer(state, action) {
@@ -72,7 +91,8 @@ const Visualization = () => {
     * - Take in query params and set form state
     */
     useEffect(() => {
-        let queryParams = queryString.parse(location.search);
+
+        let queryParams = new URLSearchParams(location.search);
 
         //TODO: Async call
         // Load State on mount;
@@ -80,9 +100,9 @@ const Visualization = () => {
             {value: '2019-01', label: 'January 2019'},
             {value: '2019-02', label: 'February 2019'}
         ];
-        let selectedMonth = selectedOptionIfExists(monthOptions, queryParams.month);
+        let selectedMonth = selectedOptionIfExists(monthOptions, queryParams.get('month'));
         let productOptions = determineFakeApiOptions(selectedMonth);
-        let selectedProduct = selectedOptionIfExists(productOptions, queryParams.product);
+        let selectedProduct = selectedOptionIfExists(productOptions, queryParams.get('product'));
 
         //TODO: Determine render from query parameter.
         // This is a little different than an API will work but same idea
@@ -99,24 +119,6 @@ const Visualization = () => {
         // Hiding warning as I expect this call to run only once
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
-    /**
-     * Build fake product options based on the month passed in
-     * @param month
-     * @returns {Array}
-     */
-    const determineFakeApiOptions = (month) => {
-        let options = [];
-        if (month === '2019-01') {
-            options.push({value: '1', label: 'Crayons'});
-            options.push({value: '2', label: 'Pencils'});
-        }
-        if (month === '2019-02') {
-            options.push({value: '2', label: 'Pencils'});
-            options.push({value: '3', label: 'Pens'});
-        }
-        return options;
-    };
 
     /*
     * Update product list when the month changes
@@ -158,6 +160,7 @@ const Visualization = () => {
     };
 
     const missingParams = state.month === '' || state.product === '' || state.render === false;
+    const atRoot = location.pathname === '/visualization';
 
     return (
         <>
@@ -196,25 +199,39 @@ const Visualization = () => {
                                         <Two month={state.month} product={state.product} showDescription={false}/>
                                     </Route>
                                     {/* If the path is wrong or they are at the root then redirect to visualization one*/}
+                                    {/* TODO: Loses Query Params */}
                                     <Redirect to="/visualization/one"/>
                                 </Switch>
                             )}
                         </div>
-                        {/* TODO: Still shows description area if at '/visualization' */}
-                        <div className="card-footer text-muted">
-                            <Switch>
-                                <Route path="/visualization/one">
-                                    <h6>Description One</h6>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad animi distinctio ducimus earum, eligendi minus nihil non perspiciatis quo veritatis? Ab consectetur dolores eum expedita nemo voluptas voluptates! Repudiandae, sint!</p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad animi distinctio ducimus earum, eligendi minus nihil non perspiciatis quo veritatis? Ab consectetur dolores eum expedita nemo voluptas voluptates! Repudiandae, sint!</p>
-                                </Route>
-                                <Route path="/visualization/two">
-                                    <h6>Description Two</h6>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad animi distinctio ducimus earum, eligendi minus nihil non perspiciatis quo veritatis? Ab consectetur dolores eum expedita nemo voluptas voluptates! Repudiandae, sint!</p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad animi distinctio ducimus earum, eligendi minus nihil non perspiciatis quo veritatis? Ab consectetur dolores eum expedita nemo voluptas voluptates! Repudiandae, sint!</p>
-                                </Route>
-                            </Switch>
-                        </div>
+                        {!atRoot &&
+                            <div className="card-footer text-muted">
+                                <Switch>
+                                    <Route path="/visualization/one">
+                                        <h6>Description One</h6>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad animi distinctio
+                                            ducimus earum, eligendi minus nihil non perspiciatis quo veritatis? Ab
+                                            consectetur dolores eum expedita nemo voluptas voluptates! Repudiandae,
+                                            sint!</p>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad animi distinctio
+                                            ducimus earum, eligendi minus nihil non perspiciatis quo veritatis? Ab
+                                            consectetur dolores eum expedita nemo voluptas voluptates! Repudiandae,
+                                            sint!</p>
+                                    </Route>
+                                    <Route path="/visualization/two">
+                                        <h6>Description Two</h6>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad animi distinctio
+                                            ducimus earum, eligendi minus nihil non perspiciatis quo veritatis? Ab
+                                            consectetur dolores eum expedita nemo voluptas voluptates! Repudiandae,
+                                            sint!</p>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad animi distinctio
+                                            ducimus earum, eligendi minus nihil non perspiciatis quo veritatis? Ab
+                                            consectetur dolores eum expedita nemo voluptas voluptates! Repudiandae,
+                                            sint!</p>
+                                    </Route>
+                                </Switch>
+                            </div>
+                        }
                     </div>
                 </div>
             </section>
