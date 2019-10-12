@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import {withRouter} from "react-router-dom";
 import MainNavLink from "./MainNavLink";
+import SubMenu from "./SubMenu";
+import {useLocation} from "react-router-dom";
 
-// TODO: Accessibility, I18N
-//  Since I am just sliding the side menu out of view I believe its still accessible  is there a way to change that?
-
-const Navbar = ({location}) => {
+const Navbar = () => {
     const [navCollapsed, setNavCollapsed] = useState(true);
+    const location = useLocation();
 
     const toggleCollapsed = () => {
         setNavCollapsed(current => !current);
@@ -45,22 +44,21 @@ const Navbar = ({location}) => {
                     <MainNavLink to="/" exact={true} handleNavigate={handleNavigate}>
                         Public Homepage
                     </MainNavLink>
-                    <MainNavLink to="/charts" handleNavigate={handleNavigate}>
-                        Charts
-                    </MainNavLink>
-                    <MainNavLink to="/visualization" exact={true} handleNavigate={handleNavigate}>
-                        Visualization
-                    </MainNavLink>
-                    <MainNavLink to="/visualization/one" handleNavigate={handleNavigate}>
-                        Visualization One
-                    </MainNavLink>
-                    <MainNavLink to="/visualization/two" handleNavigate={handleNavigate}>
-                        Visualization Two
-                    </MainNavLink>
+                    <SubMenu menuName="Visualizations">
+                        <MainNavLink to="/charts" handleNavigate={handleNavigate}>
+                            Charts
+                        </MainNavLink>
+                        <MainNavLink to="/visualization/one" handleNavigate={handleNavigate}>
+                            Visualization One
+                        </MainNavLink>
+                        <MainNavLink to="/visualization/two" handleNavigate={handleNavigate}>
+                            Visualization Two
+                        </MainNavLink>
+                    </SubMenu>
                 </div>
             </section>
         </>
     )
 };
 
-export default withRouter(Navbar);
+export default Navbar;

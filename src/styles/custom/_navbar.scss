@@ -92,6 +92,33 @@
   > .list-group {
     @extend .list-group-flush;
 
+    > button {
+      @extend .font-weight-bold;
+      background-color: $lions-blue;
+      outline: 0;
+    }
+
+    // This section is for sub menus (one level deep)
+    > div {
+      > .list-group-item {
+        @extend .pl-5;
+        background-color: $lions-blue;
+        color: $white;
+
+        &.list-group-item-action {
+          &:hover {
+            background-color: darken($lions-blue, 10%);
+          }
+
+          &.active {
+            background-color: darken($lions-blue, 20%);
+          }
+
+          color: $white;
+        }
+      }
+    }
+
     > .list-group-item {
       background-color: $lions-blue;
       color: $white;
