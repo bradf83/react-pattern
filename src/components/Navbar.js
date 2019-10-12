@@ -42,9 +42,6 @@ const Navbar = ({location}) => {
             {/*Nav Side*/}
             <section className={`navbar-side ${collapsed}`}>
                 <div className="list-group">
-                    <div className="list-group-item list-group-item-header">
-                        React Patterns
-                    </div>
                     <MainNavLink to="/" exact={true} handleNavigate={handleNavigate}>
                         Public Homepage
                     </MainNavLink>

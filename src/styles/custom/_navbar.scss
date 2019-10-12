@@ -73,6 +73,9 @@
   border-top-color: $lions-silver;
   border-top-style: solid;
   border-top-width: 1px;
+  border-right-color: $lions-silver;
+  border-right-width: 1px;
+  border-right-style: solid;
   left: 0;
   position: fixed;
   top: 51px;
@@ -88,32 +91,25 @@
 
   > .list-group {
     @extend .list-group-flush;
-    @extend .font-weight-bold;
-    color: $lions-silver;
-
-    > button {
-      @extend .font-weight-bold;
-      color: $lions-silver;
-      outline: 0;
-    }
 
     > .list-group-item {
-      background-color: $lions-silver;
+      background-color: $lions-blue;
+      color: $white;
 
       &.list-group-item-header {
         @extend .font-weight-bold;
         @extend .text-white;
-        background-color: darken($lions-silver, 30%);
+        background-color: $lions-silver;
         font-size: $h6-font-size;
       }
 
       &.list-group-item-action {
         &:hover {
-          background-color: darken($lions-silver, 10%);
+          background-color: darken($lions-blue, 10%);
         }
 
         &.active {
-          background-color: darken($lions-silver, 20%);
+          background-color: darken($lions-blue, 20%);
         }
 
         color: $white;
