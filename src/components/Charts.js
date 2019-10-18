@@ -8,6 +8,7 @@ import HorizontalBar from "./rechart/HorizontalBar";
 import HorizontalBarChart from "./nivo/HorizontalBarChart";
 import Sankey from "./nivo/Sankey";
 import PieChart from "./rechart/PieChart";
+import MixedBar from "./rechart/MixedBar";
 
 
 const Charts = () => {
@@ -35,6 +36,9 @@ const Charts = () => {
                     <NavLink className="nav-link" to="/charts/rechartsPie">Recharts Pie</NavLink>
                 </li>
                 <li className="nav-item">
+                    <NavLink className="nav-link" to="/charts/rechartsMixedBar">Recharts MixedBar</NavLink>
+                </li>
+                <li className="nav-item">
                     <NavLink className="nav-link" to="/charts/nivoHorizontalBar">Nivo Horizontal Bar</NavLink>
                 </li>
                 <li className="nav-item">
@@ -52,6 +56,9 @@ const Charts = () => {
                 <Route path="/charts/rechartsHorizontalBar" component={HorizontalBar}/>
                 <Route path="/charts/rechartsPie">
                     <PieChart />
+                </Route>
+                <Route path="/charts/rechartsMixedBar">
+                    <MixedBar />
                 </Route>
                 <Route path="/charts/nivoHorizontalBar" component={HorizontalBarChart}/>
                 <Route path="/charts/nivoSankey" component={Sankey}/>
