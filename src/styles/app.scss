@@ -4,3 +4,37 @@
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/bootstrap";
 @import "custom/navbar";
+
+// Not sure if I I will keep this so leaving it here for now.
+
+.flip-card-container {
+  perspective: 1500px; // Needs to change based on size of viewport
+}
+
+.flip-card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+}
+
+.flip-card-face {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  backface-visibility: hidden;
+}
+
+.flip-card__face--front {
+//  Nothing
+}
+
+.flip-card__face--back {
+  background-color:white;
+  transform: rotateY( 180deg );
+}
+
+.flip-card.is-flipped {
+  transform: rotateY(180deg);
+}

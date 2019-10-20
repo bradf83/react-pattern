@@ -4,6 +4,7 @@ import PublicWelcome from "./components/PublicWelcome";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Charts from "./components/Charts";
 import Visualization from "./components/visualization/Visualization";
+import LogRoute from "./components/logging/LogRoute";
 
 function App() {
     return (
@@ -16,6 +17,7 @@ function App() {
                     <Visualization/>
                 </Route>
             </Switch>
+            <LogRoute/>
         </Router>
     );
 }
