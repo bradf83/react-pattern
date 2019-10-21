@@ -38,3 +38,51 @@
 .flip-card.is-flipped {
   transform: rotateY(180deg);
 }
+
+// Timeline stuff
+
+ul.timeline {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  text-align: center;
+}
+
+ul.timeline li {
+  display: inline;
+  padding-right: 20px;
+}
+
+ul.timeline li.last {
+  display: inline;
+  padding-right: 12px;
+}
+
+ul.timeline li:before {
+  border: 2px solid black;
+  background: white;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  content: '';
+  position: absolute;
+}
+
+ul.timeline li:hover:before {
+  background: lightblue;
+}
+
+ul.timeline li:after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  margin-left: 12px;
+  margin-top: 5px;
+  height:2px;
+  border: 1px solid black;
+}
+
+ul.timeline li.last:after {
+  content: none;
+  width: 0;
+}
