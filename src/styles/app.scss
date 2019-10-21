@@ -82,7 +82,7 @@ ul.timeline li:after {
   border: 1px solid black;
 }
 
-ul.timeline li.last:after {
+ul.timeline li:last-child:after {
   content: none;
   width: 0;
 }

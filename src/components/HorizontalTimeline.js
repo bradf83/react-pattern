@@ -14,7 +14,7 @@ const HorizontalTimeline = ({length = 0}) => {
     return (
         <ul className="timeline">
             {emptyArray.map((item, index) =>
-                <li key={index} className={`${(index === length - 1) && 'last'}`} onClick={() => handleClick(index)}/>
+                <li key={index} onClick={() => handleClick(index)}/>
             )}
         </ul>
     )
