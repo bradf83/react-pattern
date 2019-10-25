@@ -54,6 +54,9 @@ const Navbar = () => {
                         <MainNavLink to="/visualization/two" handleNavigate={handleNavigate}>
                             Visualization Two
                         </MainNavLink>
+                        <MainNavLink to="/reactRough" handleNavigate={handleNavigate}>
+                            Rough JS & Charts
+                        </MainNavLink>
                     </SubMenu>
                 </div>
             </section>
