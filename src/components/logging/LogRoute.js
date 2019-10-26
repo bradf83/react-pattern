@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import {useLocation} from "react-router-dom";
 
 //TODO: Maybe save all events in local storage, up to 500 events
@@ -29,7 +29,7 @@ export const LogRoute = () => {
             console.log(events);
             setEvents([]);
         }
-    }, [events.length]);
+    }, [events]);
 
     return null;
 };

@@ -135,7 +135,7 @@ const Visualization = () => {
             dispatch({type: 'UPDATE_OPTIONS', name: 'productOptions', value: options});
             dispatch({type: 'SELECT_FORM_VALUE', name: 'product', value: selectedProduct});
         }
-    }, [state.month, state.mounted]); // Do anytime the month changes
+    }, [state.month, state.mounted, state.product]); // Do anytime the month changes
 
     useEffect(() => {
         if(state.mounted) {
@@ -146,7 +146,7 @@ const Visualization = () => {
                 search: `?month=${state.month}&product=${state.product}` // TODO: Make this smarter
             });
         }
-    }, [state.month, state.product, state.mounted]);
+    }, [state.month, state.product, state.mounted, history, location.pathname]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
