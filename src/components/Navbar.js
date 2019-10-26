@@ -58,6 +58,9 @@ const Navbar = () => {
                             Rough JS & Charts
                         </MainNavLink>
                     </SubMenu>
+                    <MainNavLink to="/framer" handleNavigate={handleNavigate}>
+                        Framer
+                    </MainNavLink>
                 </div>
             </section>
         </>

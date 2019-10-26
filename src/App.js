@@ -5,7 +5,8 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Charts from "./components/Charts";
 import Visualization from "./components/visualization/Visualization";
 import LogRoute from "./components/logging/LogRoute";
-import Index from "./components/rough";
+import Rough from "./components/rough";
+import Framer from "./components/framer";
 
 function App() {
     return (
@@ -18,7 +19,10 @@ function App() {
                     <Visualization/>
                 </Route>
                 <Route path="/reactRough">
-                    <Index/>
+                    <Rough/>
+                </Route>
+                <Route path="/framer">
+                    <Framer/>
                 </Route>
             </Switch>
             <LogRoute/>

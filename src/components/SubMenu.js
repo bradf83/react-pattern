@@ -1,19 +1,36 @@
 import React, {useState} from "react";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import { faCaretRight } from '@fortawesome/free-solid-svg-icons'
+import {AnimatePresence, motion} from "framer-motion";
 
 const SubMenu = ({menuName, children}) => {
-    const [expanded, setExpanded] = useState(false);
+    const [isCollapsed, setCollapsed] = useState(true);
+
+    const variants = {
+        collapsed: {
+            height: 0,
+            opacity: 0,
+            overflow: "hidden",
+        },
+        open: {
+            height: "auto",
+            opacity: 1,
+        }
+    };
 
     return (
         <>
-            <button className="list-group-item list-group-item-action" onClick={() => setExpanded(current => !current)}>
+            <button className="list-group-item list-group-item-action" onClick={() => setCollapsed(current => !current)}>
                 {menuName}
-                <FontAwesomeIcon icon={faCaretRight} className={`fa-lg fa-pull-right ${expanded && 'fa-rotate-90'}`} />
             </button>
-            <div style={{display: `${expanded ? 'block' : 'none'}`}}>
-                {children}
-            </div>
+            <AnimatePresence initial={false}>
+                {!isCollapsed && (
+                    <motion.div
+                        key="content" initial="collapsed" animate="open" exit="collapsed" variants={variants}
+                        transition={{ duration: 0.7}}
+                    >
+                        {children}
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </>
     )
 };

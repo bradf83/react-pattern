@@ -7,7 +7,7 @@ const Index = () => {
     return(
         <>
             <ContainerContent>
-                <h3 >Rough JS & Rough Chart Content</h3>
+                <h3>Rough JS & Rough Chart Content</h3>
             </ContainerContent>
             <ContainerContent>
                 <Buckets/>
