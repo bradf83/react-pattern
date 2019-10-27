@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ContainerContent from "./ContainerContent";
 import HorizontalTimeline from "./HorizontalTimeline";
 import ReactTooltip from 'react-tooltip'
+import useKonamiCode from "./easterEggs/useKonamiCode";
 
 const PublicWelcome = () => {
+
+    const sequence = useKonamiCode(() => setKonamiCodeActive(current => !current));
+    const [isKonamiCodeActive, setKonamiCodeActive] = useState(false);
+
     return (
         <ContainerContent>
             <h5>Welcome</h5>
@@ -24,6 +29,14 @@ const PublicWelcome = () => {
                 <button className="btn btn-info ml-2" data-place="right" data-tip="Info Tooltip on the Right">Info</button>
             </div>
             <ReactTooltip />
+
+            <h6 className="mt-2">Konami Code Example (up, up, down, down, left, right, left, right, B, A)</h6>
+            <div>{JSON.stringify(sequence)}</div>
+            {isKonamiCodeActive && (
+                <div className="alert alert-info">
+                    <strong>Konami code active.  Enter again to turn off.</strong>
+                </div>
+            )}
 
         </ContainerContent>
     )
