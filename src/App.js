@@ -7,6 +7,7 @@ import Visualization from "./components/visualization/Visualization";
 import LogRoute from "./components/logging/LogRoute";
 import Rough from "./components/rough";
 import Framer from "./components/framer";
+import Toolbar from "./components/toolbar/Toolbar";
 
 function App() {
     return (
@@ -23,6 +24,9 @@ function App() {
                 </Route>
                 <Route path="/framer">
                     <Framer/>
+                </Route>
+                <Route path="/toolbar">
+                    <Toolbar/>
                 </Route>
             </Switch>
             <LogRoute/>
