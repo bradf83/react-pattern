@@ -60,6 +60,9 @@ const Navbar = () => {
                         <MainNavLink to="/toolbar" handleNavigate={handleNavigate}>
                             Toolbar
                         </MainNavLink>
+                        <MainNavLink to="/queryParams" handleNavigate={handleNavigate}>
+                            Query Params
+                        </MainNavLink>
                     </SubMenu>
                     <MainNavLink to="/framer" handleNavigate={handleNavigate}>
                         Framer
